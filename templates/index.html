@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Encryption</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Text Encryption Using Cryptographic Algorithms</h1>
+        <form method="POST">
+            <textarea name="input_text" rows="4" cols="50" placeholder="Enter text here"></textarea><br><br>
+            <button type="submit" name="action" value="Encrypt">Encrypt</button>
+            <button type="submit" name="action" value="Decrypt">Decrypt</button>
+        </form>
+
+        {% if encrypted_text %}
+        <h2>Encrypted Text:</h2>
+        <div class="output-container">
+            <p id="encrypted-text" class="output">{{ encrypted_text }}</p>
+            <button onclick="copyText('encrypted-text')" class="copy-btn">
+                <img src="{{ url_for('static', filename='copy-icon.png') }}" alt="Copy">
+            </button>
+        </div>
+        {% endif %}
+
+        {% if decrypted_text %}
+        <h2>Decrypted Text:</h2>
+        <div class="output-container">
+            <p id="decrypted-text" class="output">{{ decrypted_text }}</p>
+            <button onclick="copyText('decrypted-text')" class="copy-btn">
+                <img src="{{ url_for('static', filename='copy-icon.png') }}" alt="Copy">
+            </button>
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>Developer: Tanmoy Gain</p>
+        <p>Internship Project for Slash Mark IT Startup</p>
+    </footer>
+
+    <script>
+        function copyText(elementId) {
+            var text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Text copied to clipboard');
+            }, function(err) {
+                alert('Failed to copy text');
+            });
+        }
+    </script>
+</body>
+</html>
